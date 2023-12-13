@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import Canvas from './canvas';
 
 function App() {
+    const [flag,setFlag]=useState(false);
+    const [choose,setChoose] =useState<string>("choose");
+const onclick=()=>{
+    setFlag(true);
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App flex">
+      <header className='flex'>
+        <nav className='flex'>
+          <h2>
+        Algo-visualiser</h2>
+            <select value={choose} onChange={(e)=>setChoose(e.target.value)}>
+                <option value='choose'>Choose</option>
+                <option value='selectionsort'>Selection Sort</option>
+                <option value='bubblesort'>Bubble Sort</option>
+                <option value='insertionsort'>Insertion Sort</option>
+            </select>
+        </nav></header>
+      {/*<CanvasComponent  Play ={flag}/>*/}
+      <Canvas flag={flag} setFlag={setFlag} choose={choose}/>
+        { choose!=='choose'&&<button onClick={onclick}>Play</button>}
     </div>
   );
 }
